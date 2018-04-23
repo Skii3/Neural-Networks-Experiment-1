@@ -1,4 +1,4 @@
-function [ w_final, err ] = train_my( input, output, w, batch_size, layer_size, eta, momen, max_iter,type, output_type)
+function [ w_final, err ] = train_my( input, output, w, batch_size, layer_size, eta, momen, max_iter,type, output_type,error_target)
 % the main forward propagation and backward propagation
 layer_num = size(w,2) + 1;
 train_size = size(input,1);
@@ -60,6 +60,9 @@ while(1)
     elseif err_min > err(iter)
         err_min = err(iter);
         w_final = w;
+    end
+    if err(iter) < error_target
+        break;
     end
     fprintf('[*] Iteration: %d, L2 error: %.4f\n',iter,err(iter));
     if iter > max_iter

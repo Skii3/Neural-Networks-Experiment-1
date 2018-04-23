@@ -6,6 +6,7 @@ layer_size = [9,3,1];
 layer_num = size(layer_size,2);
 eta = 0.2;
 momen = 0.4;
+error_target = 0;
 max_iter = 200;
 type = 'Relu';  % 'sigmoid', 'Relu', 'sgn','linear'
 output_type = 'sgn';
@@ -29,7 +30,7 @@ end
 %% start iteration, with batch as a process unit
 [ w_final, err ] = train_my( input,output, w, ...
     batch_size, layer_size, eta, momen, max_iter,...
-    type, output_type);
+    type, output_type, error_target);
 %% show result
 figure,plot([1:1:size(err,2)],err)
 w = w_final;
